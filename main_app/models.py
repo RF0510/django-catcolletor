@@ -31,5 +31,12 @@ class Feeding(models.Model):
         return f"{self.get_meal_display()} on {self.date}" # Nice method for obtaining the friendly value of a Field.choice
     class Meta:
         ordering = ['-date']
+        
+class Toy(models.Model):
+  name = models.CharField(max_length=50)
+  color = models.CharField(max_length=20)
+
+  def __str__(self):
+    return self.name
 
    
