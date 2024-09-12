@@ -8,11 +8,20 @@ MEALS = (
     ('D', 'Dinner')
 )
 
+class Toy(models.Model):
+  name = models.CharField(max_length=50)
+  color = models.CharField(max_length=20)
+
+  def __str__(self):
+    return self.name
+
+
 class Cat(models.Model):
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     age = models.IntegerField()
+    toys = models.ManyToManyField(Toy)
     def fed_for_today(self):
         return self.feeding_set.filter(date=date.today()).count() >= len(MEALS)
     
@@ -32,11 +41,6 @@ class Feeding(models.Model):
     class Meta:
         ordering = ['-date']
         
-class Toy(models.Model):
-  name = models.CharField(max_length=50)
-  color = models.CharField(max_length=20)
 
-  def __str__(self):
-    return self.name
 
    
